@@ -1,0 +1,50 @@
+# Archivos y directorios generados por Django
+__pycache__
+*.pyc
+*.pyo
+*.db
+
+# Archivos de configuración local (por ejemplo, settings.py con contraseñas)
+*.conf
+
+# Directorio virtualenv (si utilizas un entorno virtual)
+venv/
+
+# Archivos de registro y directorios
+log/
+logs/
+
+# Archivos de base de datos SQLite
+*.sqlite3
+
+# Archivos de migración de Django
+*/migrations/
+
+# Archivos de medios cargados por los usuarios (si usas MEDIA_ROOT)
+media/
+
+# Archivos estáticos recopilados por collectstatic
+staticfiles/
+
+# Caché de Python
+__pycache__/
+
+# Archivos locales de desarrollo
+*.bak
+*.swp
+*~
+*.log
+*.pot
+
+# Archivos de IDE y editores
+.vscode/
+.idea/
+*.suo
+*.ntvs_*
+*.njsproj
+*.sln
+*.sw?
+
+# Entorno de desarrollo Python
+.env
+Ten en cuenta que este es solo un ejemplo y puedes personalizar tu archivo .gitignore según las necesidades específicas de tu proyecto. Por ejemplo, si estás utilizando otros sistemas de gestión de bases de datos como PostgreSQL o MySQL, es posible 
