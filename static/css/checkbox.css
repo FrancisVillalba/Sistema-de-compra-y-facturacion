@@ -1,0 +1,37 @@
+.checkbox-custom { 
+  content:'';
+  background:transparent;
+  border: 3px solid #88c64b;
+  border-radius: 25px;
+  display: inline-block;
+  height: 35px;
+  width: 35px;
+  margin-right: 5px;
+  text-align:center;
+  text-shadow:4px -2px 3px gray; 
+  vertical-align:middle; 
+}
+   
+   
+  
+  
+  /* label:before{
+    content:'';
+    background:transparent;
+    border: 3px solid #88c64b;
+    border-radius: 25px;
+    display: inline-block;
+    height: 35px;
+    width: 35px;
+    margin-right: 5px;
+    text-align:center;
+    text-shadow:4px -2px 3px gray; 
+    vertical-align:middle; 
+  }
+  input[type=checkbox]:checked + label:before{
+    content: '✔';
+    font-size: 20px;
+    font-family:'Times New Roman';
+    font-weight: 900;
+    color:#88c64b;
+  }  
