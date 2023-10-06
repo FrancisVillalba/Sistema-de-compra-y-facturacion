@@ -1,0 +1,100 @@
+{% extends 'base/base.html' %}
+
+{% block page_content %} 
+<div class="container-fluid">
+
+     <!-- Dropdown Card Example -->
+ <div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div
+        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Listado de unidad de medidas</h6>
+        <div class="dropdown no-arrow">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">Acciones:</div>
+                <a class="dropdown-item" href="{% url 'inventario:unidad_medida_nuevo-vw' %}"><i class="far fa-plus-square"></i> Crear</a>
+                <!-- <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a> -->
+            </div>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">  
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered table-color-head-and-footer" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Usuario Creación</th>
+                            <th>Fecha Creación</th>
+                            <th class="all">Acciones</th> 
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Usuario Creación</th>
+                            <th>Fecha Creación</th>
+                            <th class="all">Acciones</th> 
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% if not obj %}
+                        <tr>
+                            <td colspan="6" style="text-align: center;">No existe ninguna categoría</td>
+                        </tr>
+                        {% else %}
+                            {% for item in obj %}
+                                <tr>
+                                    <td>{{ item.id }}</td>
+                                    <td>{{ item.descripcion }}</td>
+                                    <!-- <td>{{ item.estado|yesno:'Activo, Inactivo'}}</td> -->
+                                    <td>
+                                        <span class="badge {% if item.estado %}badge-success{% else %}badge-danger{% endif %}">
+                                            {{ item.estado|yesno:'Activo, Inactivo'}}
+                                       </span>
+                                    </td>
+                                    <td>{{ item.usuario_creacion}}</td> 
+                                    <td>{{ item.fecha_creacion|date:"d/m/Y" }}</td>
+                                    <td>  
+                                        <a href="{% url 'inventario:unidad_medida_editar-vw'  item.id  %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a> 
+                                        <a href="{% url 'inventario:unidad_medida_editar_estado-vw' item.id %}" class="btn btn-danger btn-circle" role="button" onclick="return confirm('¿Estás seguro de que deseas inactivar el registro?');"><i class="fa fa-power-off"></i></a>
+                                    </td> 
+                                </tr>
+                            {% endfor %} 
+                        {% endif %}
+                    </tbody>
+                </table> 
+            </div>
+        </div> 
+    </div>
+    <div class="card-footer">
+
+    </div> 
+</div> 
+
+    <!-- Page Heading -->
+     
+
+</div>
+{% endblock %}
+
+{% block js_page %}
+<script>
+  // Call the dataTables jQuery plugin
+  $(document).ready(function() {
+    $('.table').DataTable();
+  });
+</script>
+{% endblock %}

@@ -1,8 +1,8 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView,DeleteView, CreateView, UpdateView
-from .models import Categoria, Marca, SubCategoria
-from .forms import CategoriaForm, MarcaForm, SubCategoriaForm
+from .models import Categoria, Marca, SubCategoria, UnidadMedida
+from .forms import CategoriaForm, MarcaForm, SubCategoriaForm, UnidadMedidaForm
 from django.urls import reverse_lazy
 
 # Create your views here.
@@ -145,6 +145,53 @@ def update_marca_estado(request, marca_id):
     subcategoria.save()
     
     success_url = reverse_lazy('inventario:marca_lista-vw')  # Define success_url here
+
+    return redirect(success_url)
+
+
+class UnidadMedidaLista(LoginRequiredMixin, ListView):
+    login_url = 'bases/login-vw'
+
+    model = UnidadMedida
+    template_name = 'inventario/unidad_medida_lista.html'
+    context_object_name = 'obj'
+
+class UnidadMedidaNuevo(LoginRequiredMixin, CreateView):
+    login_url='bases:login-vw'
+
+    model = UnidadMedida
+    template_name = 'inventario/unidad_medida_form.html'
+    context_object_name = 'obj' 
+    form_class = UnidadMedidaForm
+    success_url = reverse_lazy('inventario:unidad_medida_lista-vw')
+    
+
+    def form_valid(self, form):
+        form.instance.usuario_creacion = self.request.user
+        # return super().form.valid(form)
+        return super(UnidadMedidaNuevo, self).form_valid(form)
+    
+class UnidadMedidaEditar(LoginRequiredMixin, UpdateView):
+    login_url='bases:login-vw'
+
+    model = UnidadMedida
+    template_name = 'inventario/unidad_medida_form.html'
+    context_object_name = 'obj' 
+    form_class = UnidadMedidaForm
+    success_url = reverse_lazy('inventario:unidad_medida_lista-vw')
+    
+
+    def form_valid(self, form):
+        form.instance.usuario_modificacion = self.request.user.id
+        # return super().form.valid(form)
+        return super(UnidadMedidaEditar, self).form_valid(form) 
+    
+def update_unidad_medida_estado(request, unidad_medida_id):
+    subcategoria = get_object_or_404(UnidadMedida, pk=unidad_medida_id)
+    subcategoria.estado = 0  # Set estado to 0 (False)
+    subcategoria.save()
+    
+    success_url = reverse_lazy('inventario:unidad_medida_lista-vw')  # Define success_url here
 
     return redirect(success_url)
     
