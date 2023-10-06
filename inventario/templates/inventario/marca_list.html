@@ -8,7 +8,7 @@
     <!-- Card Header - Dropdown -->
     <div
         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Listado de categorías</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Listado de marcas</h6>
         <div class="dropdown no-arrow">
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -17,7 +17,7 @@
             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                 aria-labelledby="dropdownMenuLink">
                 <div class="dropdown-header">Acciones:</div>
-                <a class="dropdown-item" href="{% url 'inventario:categoria_nuevo-vw' %}"><i class="far fa-plus-square"></i> Crear</a>
+                <a class="dropdown-item" href="{% url 'inventario:marca_nuevo-vw' %}"><i class="far fa-plus-square"></i> Crear</a>
                 <!-- <a class="dropdown-item" href="#">Another action</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Something else here</a> -->
@@ -68,8 +68,8 @@
                                     <td>{{ item.usuario_creacion}}</td> 
                                     <td>{{ item.fecha_creacion|date:"d/m/Y" }}</td>
                                     <td>  
-                                        <a href="{% url 'inventario:categoria_editar-vw'  item.id  %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a> 
-                                        <a href="{% url 'inventario:categoria_editar_estado-vw' item.id %}" class="btn btn-danger btn-circle" role="button" onclick="return confirm('¿Estás seguro de que deseas inactivar el registro?');"><i class="fa fa-power-off"></i></a>
+                                        <a href="{% url 'inventario:marca_editar-vw'  item.id  %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a> 
+                                        <a href="{% url 'inventario:marca_editar_estado-vw' item.id %}" class="btn btn-danger btn-circle" role="button" onclick="return confirm('¿Estás seguro de que deseas inactivar el registro?');"><i class="fa fa-power-off"></i></a>
                                     </td> 
                                 </tr>
                             {% endfor %} 
