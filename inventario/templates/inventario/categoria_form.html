@@ -12,7 +12,7 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                        <div class="text-xs font-weight-bold {% if obj %}text-warning{% else %}text-success{% endif %} text-uppercase mb-1">
                             {% if obj %} Editar {% else %} Nueva {% endif %} Categoría
                         </div> 
                         <div class="dropdown-divider"></div>
@@ -33,7 +33,7 @@
                         <div class="row">
                             <div class="col">
                                 <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Guardar</button>
-                                <a href="{% url 'inventario:categoria_list-vw' %}" class="btn btn-danger"><span class="fa fa-undo"></span> Cancelar</a>
+                                <a href="{% url 'inventario:categoria_lista-vw' %}" class="btn btn-danger"><span class="fa fa-undo"></span> Cancelar</a>
                             </div>
                         </div>
                     </div> 

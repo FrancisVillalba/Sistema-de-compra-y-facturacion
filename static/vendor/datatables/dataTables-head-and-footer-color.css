@@ -1,0 +1,11 @@
+/* Cambia el color de fondo del encabezado (thead) */
+.table-color-head-and-footer thead {
+    background-color: #83abd3; /* Cambia el color de fondo a azul, puedes ajustarlo según tus preferencias */
+    color: white; /* Cambia el color del texto a blanco o el color deseado */
+}
+
+/* Cambia el color de fondo del pie de página (tfoot) */
+.table-color-head-and-footer tfoot {
+    background-color: #83abd3; /* Cambia el color de fondo a azul, igual que el encabezado */
+    color: white; /* Cambia el color del texto a blanco o el color deseado */
+}

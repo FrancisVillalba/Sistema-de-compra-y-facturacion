@@ -22,6 +22,7 @@
     <link href="{% static 'css/checkbox.css'%}" rel="stylesheet">
      <!-- Custom styles for this page -->
     <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/datatables/dataTables-head-and-footer-color.css' %}" rel="stylesheet"> 
 
 </head>
 
@@ -69,8 +70,9 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Catalogo de inventario:</h6>
-                        <a class="collapse-item" href="{% url 'inventario:categoria_list-vw' %}">Categorías</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        <a class="collapse-item" href="{% url 'inventario:categoria_lista-vw' %}">Categorías</a>
+                        <a class="collapse-item" href="{% url 'inventario:subcategoria_lista-vw' %}">Sub categorías</a>
+                        
                     </div>
                 </div>
             </li>
