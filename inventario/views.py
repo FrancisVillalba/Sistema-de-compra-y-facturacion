@@ -1,8 +1,8 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView,DeleteView, CreateView, UpdateView
-from .models import Categoria, Marca, SubCategoria, UnidadMedida
-from .forms import CategoriaForm, MarcaForm, SubCategoriaForm, UnidadMedidaForm
+from django.views.generic import ListView, CreateView, UpdateView
+from .models import Categoria, Marca, Producto, SubCategoria, UnidadMedida
+from .forms import CategoriaForm, MarcaForm, ProductoForm, SubCategoriaForm, UnidadMedidaForm
 from django.urls import reverse_lazy
 
 # Create your views here.
@@ -192,6 +192,53 @@ def update_unidad_medida_estado(request, unidad_medida_id):
     subcategoria.save()
     
     success_url = reverse_lazy('inventario:unidad_medida_lista-vw')  # Define success_url here
+
+    return redirect(success_url)
+
+
+class PruductoLista(LoginRequiredMixin, ListView):
+    login_url = 'bases/login-vw'
+
+    model = Producto
+    template_name = 'inventario/producto_lista.html'
+    context_object_name = 'obj'
+
+class ProductoNuevo(LoginRequiredMixin, CreateView):
+    login_url='bases:login-vw'
+
+    model = Producto
+    template_name = 'inventario/producto_form.html'
+    context_object_name = 'obj' 
+    form_class = ProductoForm
+    success_url = reverse_lazy('inventario:producto_lista-vw')
+    
+
+    def form_valid(self, form):
+        form.instance.usuario_creacion = self.request.user
+        # return super().form.valid(form)
+        return super(ProductoNuevo, self).form_valid(form)
+    
+class ProductoEditar(LoginRequiredMixin, UpdateView):
+    login_url='bases:login-vw'
+
+    model = Producto
+    template_name = 'inventario/producto_form.html'
+    context_object_name = 'obj' 
+    form_class = ProductoForm
+    success_url = reverse_lazy('inventario:producto_lista-vw')
+    
+
+    def form_valid(self, form):
+        form.instance.usuario_modificacion = self.request.user.id
+        # return super().form.valid(form)
+        return super(ProductoEditar, self).form_valid(form) 
+    
+def update_producto_estado(request, producto_id):
+    subcategoria = get_object_or_404(Producto, pk=producto_id)
+    subcategoria.estado = 0  # Set estado to 0 (False)
+    subcategoria.save()
+    
+    success_url = reverse_lazy('inventario:producto_lista-vw')  # Define success_url here
 
     return redirect(success_url)
     

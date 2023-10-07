@@ -1,7 +1,8 @@
 from django.urls import path
 
-from inventario.views import CategoriaNuevo, CategoriaEditar, CategoriaView, MarcaEditar, MarcaLista, MarcaNuevo, SubCategoriaEditar, SubCategoriaNuevo, \
-      SubCategoriaView, update_categoria_estado, update_marca_estado,update_supcategoria_estado, UnidadMedidaEditar, UnidadMedidaLista, UnidadMedidaNuevo, update_unidad_medida_estado
+from inventario.views import CategoriaNuevo, CategoriaEditar, CategoriaView, MarcaEditar, MarcaLista, MarcaNuevo, ProductoEditar, ProductoNuevo, PruductoLista, SubCategoriaEditar, \
+  SubCategoriaNuevo,  SubCategoriaView, update_categoria_estado, update_marca_estado, update_producto_estado, \
+  update_supcategoria_estado, UnidadMedidaEditar, UnidadMedidaLista, UnidadMedidaNuevo, update_unidad_medida_estado
 
 urlpatterns = [
     path('categorias/', CategoriaView.as_view(), name='categoria_lista-vw'), 
@@ -26,5 +27,11 @@ urlpatterns = [
     path('unidad_medidas/nuevo', UnidadMedidaNuevo.as_view(), name='unidad_medida_nuevo-vw'), 
     path('unidad_medidas/editar/<int:pk>', UnidadMedidaEditar.as_view(), name='unidad_medida_editar-vw'), 
     path('unidad_medidas/editar/estado/<int:unidad_medida_id>/', update_unidad_medida_estado, name='unidad_medida_editar_estado-vw'),
+
+
+    path('producto/', PruductoLista.as_view(), name='producto_lista-vw'), 
+    path('producto/nuevo', ProductoNuevo.as_view(), name='producto_nuevo-vw'), 
+    path('producto/editar/<int:pk>', ProductoEditar.as_view(), name='producto_editar-vw'), 
+    path('producto/editar/estado/<int:producto_id>/', update_producto_estado, name='producto_editar_estado-vw'),
     
 ]
