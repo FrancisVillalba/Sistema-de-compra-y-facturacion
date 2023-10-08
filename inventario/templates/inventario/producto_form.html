@@ -1,40 +1,122 @@
-<div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        {% if obj %}
-        <form method="POST" role="form" class="form-inline" action="{% url 'inventario:producto_editar-vw' obj.pk %}">
-        {% else %}
-        <form method="POST" role="form" class="form-inline" action="{% url 'inventario:producto_nuevo-vw' %}">
-        {% endif %}
-            {% csrf_token %}
-            <div class="col-xl-12 col-md-12 mb-12">
-                {% if obj %}
-                <div class="card border-left-warning shadow h-100 py-2 ">
-                {% else %}
-                <div class="card border-left-success shadow h-100 py-2">
-                {% endif %}
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold {% if obj %}text-warning{% else %}text-success{% endif %} text-uppercase mb-1">
-                                    {% if obj %} Editar {% else %} Nuevo {% endif %} producto
-                                </div> 
-                                <div class="dropdown-divider"></div>
-                                <div class="row">  
-                                    {{ form.as_p }}
-                                </div> 
-                                <div class="dropdown-divider"></div>
-                                <div class="row">
-                                    <div class="col"> 
-                                        <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Guardar</button>
-                                        <!-- <a href="{% url 'inventario:producto_lista-vw' %}" class="btn btn-danger"><span class="fa fa-undo"></span> Cancelar</a> -->
-                                        <button type="button" class="btn btn-danger" onclick="return cerrar_modal()">Cancelar</button>
+{% extends 'base/base.html' %}
+
+{% block page_content %} 
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Productos</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'bases:home-vw' %}">Home</a></li>
+              <li class="breadcrumb-item active">Producto nuevo</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <form method="POST">
+        {% csrf_token %}
+        <div class="col-xl-12 col-md-12 mb-12">
+            {% if obj %}
+            <div class="card border-left-warning shadow h-100 py-2 ">
+            {% else %}
+            <div class="card border-left-success shadow h-100 py-2">
+            {% endif %}
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold {% if obj %}text-warning{% else %}text-success{% endif %} text-uppercase mb-1">
+                                {% if obj %} Editar {% else %} Nueva {% endif %} Sub Categoría
+                            </div> 
+                            <div class="dropdown-divider"></div>
+                            <div class="row">
+                                <div class="col-sm-2"> 
+                                    <div class="form-group"> 
+                                        {{form.codigo.label_tag}}
+                                        {{form.codigo}}
                                     </div>
                                 </div>
-                            </div> 
-                        </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        {{form.codigo_barra.label_tag}}
+                                        {{form.codigo_barra}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">  
+                                        {{form.descripcion.label_tag}}
+                                        {{form.descripcion}} 
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group"> 
+                                        {{form.precio.label_tag}}
+                                        {{form.precio}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group"> 
+                                        {{form.existencia.label_tag}}
+                                        {{form.existencia}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group"> 
+                                        {{form.ultima_compra.label_tag}}
+                                        {{form.ultima_compra}}
+                                    </div>
+                                </div> 
+                            </div>  
+                            <br>
+                            <div class="row" >
+                                <div class="col-sm-2">
+                                    <div class="form-group"> 
+                                        {{form.marca.label_tag}}
+                                        {{form.marca}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group"> 
+                                        {{form.subcategoria.label_tag}}
+                                        {{form.subcategoria}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group"> 
+                                        {{form.unidad_medida.label_tag}}
+                                        {{form.unidad_medida}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group"> 
+                                        {{form.estado.label_tag}}
+                                        <br>
+                                        {{form.estado}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="row">
+                                <div class="col">
+                                    <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Guardar</button>
+                                    <a href="{% url 'inventario:producto_lista-vw' %}" class="btn btn-danger"><span class="fa fa-undo"></span> Cancelar</a>
+                                </div>
+                            </div>
+                        </div> 
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
+<!-- /.content -->
 </div> 
+{% endblock %}
+
+{% block js_page %}
+{% endblock %}

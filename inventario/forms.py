@@ -83,6 +83,7 @@ class UnidadMedidaForm(forms.ModelForm):
         model = UnidadMedida
         fields = ['descripcion', 'estado']
         labels = {'descripcion': 'Descripción:', 'estado': 'Estado:'}
+        
         widget = {'descripcion': forms.TextInput} 
 
     def __init__(self, *args, **kwargs):
@@ -108,7 +109,7 @@ class ProductoForm(forms.ModelForm):
         model = Producto
         fields = ['codigo','codigo_barra','descripcion', 'estado','precio','existencia', 'ultima_compra', 'marca', 'subcategoria', 'unidad_medida']
         exclude = ['usuario_modificacion','usuario_creacion','fecha_modificacion', 'fecha_creacion']
-        labels = {'descripcion': 'Descripción:', 'estado': 'Estado:'}
+        labels = {'codigo': 'Código:', 'codigo_barra': 'Código de barra:', 'descripcion': 'Descripción:', 'precio': 'Precio:', 'existencia': 'Existencia:','ultima_compra':'Ultima compra:', 'marca':'Marca:', 'unidad_medida':'Unidad de medida:', 'subcategoria':'Subcategoria:'}
         widget = {'descripcion': forms.TextInput} 
 
     def __init__(self, *args, **kwargs):
@@ -130,4 +131,5 @@ class ProductoForm(forms.ModelForm):
         self.fields['estado'].widget.attrs['class'] = 'checkbox-custom'
 
         # Agregar una etiqueta personalizada para el nombre del input en el html
-        self.fields['estado'].label = 'Estado:' 
+        self.fields['estado'].label = 'Estado:'  
+        

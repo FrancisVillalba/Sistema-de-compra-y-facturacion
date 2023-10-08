@@ -1,32 +1,53 @@
 {% extends 'base/base.html' %}
 
 {% block page_content %} 
-<div class="container-fluid">
-
-     <!-- Dropdown Card Example -->
- <div class="card shadow mb-4">
-    <!-- Card Header - Dropdown -->
-    <div
-        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Listado de productos</h6>
-        <div class="dropdown no-arrow">
-            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                aria-labelledby="dropdownMenuLink">
-                <div class="dropdown-header">Acciones:</div>
-                <a class="dropdown-item" onclick="return abrir_modal('{% url 'inventario:producto_nuevo-vw' %}')" href="#"><i class="far fa-plus-square"></i> Crear</a>
-                <!-- <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a> -->
-            </div>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Productos</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'bases:home-vw' %}">Home</a></li>
+              <li class="breadcrumb-item active">Productos</li>
+            </ol>
+          </div>
         </div>
-    </div>
-    <!-- Card Body -->
-    <div class="card-body">   
-        <table class="table table-bordered table-color-head-and-footer" id="dataTable" width="100%" cellspacing="0">
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12"> 
+            <!-- /.card --> 
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Listado de productos</h3>
+
+                <div class="dropdown no-arrow float-right">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Acciones:</div>
+                        <a class="dropdown-item" href="{% url 'inventario:producto_nuevo-vw' %}"><i class="far fa-plus-square"></i> Crear</a>
+                        <!-- <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a> -->
+                    </div>
+                </div>
+
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-color-head-and-footer table-striped">
                     <thead>
                         <tr> 
                             <th>Sub. Categoría</th>
@@ -71,7 +92,7 @@
                                     <td>{{ item.descripcion }}</td>
                                     <td>{{ item.existencia }}</td>
                                     <td>{{ item.marca }}</td>
-                                    <td>{{ item.unidad_medida }}</td>
+                                    <td>{{ item.unidad_medida }}</td> 
                                     <td>
                                         <span class="badge {% if item.estado %}badge-success{% else %}badge-danger{% endif %}">
                                             {{ item.estado|yesno:'Activo, Inactivo'}}
@@ -80,33 +101,26 @@
                                     <td>{{ item.usuario_creacion}}</td> 
                                     <td>{{ item.fecha_creacion|date:"d/m/Y" }}</td>
                                     <td>
-                                        <button class="btn btn-warning btn-circle" onclick="return abrir_modal('{% url 'inventario:producto_editar-vw' item.id %}')"><i class="far fa-edit"></i></button>
-                                        <!-- <a href="#" class="btn btn-warning btn-circle" onclick="return abrir_modal('{% url 'inventario:producto_editar-vw' item.id %}')" role="button"><i class="far fa-edit"></i></a> -->
-                                        <!-- <a href="#" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a> -->
-                                        <a href="{% url 'inventario:producto_editar_estado-vw' item.id %}" class="btn btn-danger btn-circle" role="button" onclick="return confirm('¿Estás seguro de que deseas inactivar el registro?');"><i class="fa fa-power-off"></i></a>
+                                        <a href="{% url 'inventario:producto_editar-vw'  item.id  %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
+                                        <a href="{% url 'inventario:producto_editar_estado-vw' item.id %}" onclick="return confirm('¿Estás seguro de que deseas inactivar el registro?');" class="btn btn-danger btn-circle" role="button"><i class="far fa-trash-alt"></i></a>
                                     </td> 
                                 </tr>
                             {% endfor %} 
                         {% endif %}
                     </tbody>
-                </table> 
+        </table> 
     </div>
-    <div class="card-footer">
-
-    </div> 
-</div> 
-
-    <!-- Page Heading -->
-     
-
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
 </div>
-{% endblock %}
+<!-- /.col -->
+</div>
+<!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
 
-{% block js_page %}
-<script>
-  // Call the dataTables jQuery plugin
-  $(document).ready(function() {
-    $('.table').DataTable();
-  });
-</script>
 {% endblock %}

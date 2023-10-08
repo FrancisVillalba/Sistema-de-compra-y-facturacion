@@ -1,47 +1,68 @@
 {% extends 'base/base.html' %}
 
 {% block page_content %} 
-<form method="POST" class="form-inline">
-    {% csrf_token %}
-    <div class="col-xl-12 col-md-12 mb-12">
-        {% if obj %}
-        <div class="card border-left-warning shadow h-100 py-2 ">
-        {% else %}
-        <div class="card border-left-success shadow h-100 py-2">
-        {% endif %}
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold {% if obj %}text-warning{% else %}text-success{% endif %} text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nueva {% endif %} Categoría
-                        </div> 
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                    <input type="text" name="descripcion" maxlength="100" class="form-control" required id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif %}">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="form-group"> 
-                                    <label for="id_estado">Estado  :</label>
-                                    <input type="checkbox" class="checkbox-custom" name="estado"  id="id_estado" {% if obj.estado %} checked {% endif %}> 
-                                </div>
-                            </div>
-                        </div> 
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Guardar</button>
-                                <a href="{% url 'inventario:categoria_lista-vw' %}" class="btn btn-danger"><span class="fa fa-undo"></span> Cancelar</a>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-            </div>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Categorías</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'bases:home-vw' %}">Home</a></li>
+              <li class="breadcrumb-item active">Categorías</li>
+            </ol>
+          </div>
         </div>
-    </div>
-</form>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <form method="POST">
+      {% csrf_token %}
+      <div class="col-xl-12 col-md-12 mb-12">
+          {% if obj %}
+          <div class="card border-left-warning shadow h-100 py-2 ">
+          {% else %}
+          <div class="card border-left-success shadow h-100 py-2">
+          {% endif %}
+              <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                          <div class="text-xs font-weight-bold {% if obj %}text-warning{% else %}text-success{% endif %} text-uppercase mb-1">
+                              {% if obj %} Editar {% else %} Nueva {% endif %} Categoría
+                          </div> 
+                          <div class="dropdown-divider"></div>
+                          <div class="row">
+                              <div class="col-10">
+                                  <div class="input-group">
+                                      <input type="text" name="descripcion" maxlength="100" class="form-control" required id="id_descripcion" placeholder="Descripción" value="{% if obj %} {{ obj.descripcion }} {% endif %}">
+                                  </div>
+                              </div>
+                              <div class="col-2">
+                                  <div class="form-group"> 
+                                      <label for="id_estado">Estado  :</label>
+                                      <input type="checkbox" class="checkbox-custom" name="estado"  id="id_estado" {% if obj.estado %} checked {% endif %}> 
+                                  </div>
+                              </div>
+                          </div> 
+                          <div class="dropdown-divider"></div>
+                          <div class="row">
+                              <div class="col">
+                                  <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Guardar</button>
+                                  <a href="{% url 'inventario:categoria_lista-vw' %}" class="btn btn-danger"><span class="fa fa-undo"></span> Cancelar</a>
+                              </div>
+                          </div>
+                      </div> 
+                  </div>
+              </div>
+          </div>
+      </div>
+  </form> 
+    <!-- /.content -->
+  </div> 
 {% endblock %}
 
 {% block js_page %}

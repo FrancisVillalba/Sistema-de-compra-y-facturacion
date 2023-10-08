@@ -1,48 +1,69 @@
 {% extends 'base/base.html' %}
 
 {% block page_content %} 
-<form method="POST" class="form-inline">
-    {% csrf_token %}
-    <div class="col-xl-12 col-md-12 mb-12">
-        {% if obj %}
-        <div class="card border-left-warning shadow h-100 py-2 ">
-        {% else %}
-        <div class="card border-left-success shadow h-100 py-2">
-        {% endif %}
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold {% if obj %}text-warning{% else %}text-success{% endif %} text-uppercase mb-1">
-                            {% if obj %} Editar {% else %} Nueva {% endif %} marca
-                        </div> 
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="input-group">
-                                    {{form.descripcion.label_tag}}
-                                    {{form.descripcion}}
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="form-group"> 
-                                    {{form.estado.label_tag}}
-                                    {{form.estado}}
-                                </div>
-                            </div>
-                        </div> 
-                        <div class="dropdown-divider"></div>
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Guardar</button>
-                                <a href="{% url 'inventario:marca_lista-vw' %}" class="btn btn-danger"><span class="fa fa-undo"></span> Cancelar</a>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-            </div>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Marca</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'bases:home-vw' %}">Home</a></li>
+              <li class="breadcrumb-item active">Marca</li>
+            </ol>
+          </div>
         </div>
-    </div>
-</form>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <form method="POST" class="form-inline">
+      {% csrf_token %}
+      <div class="col-xl-12 col-md-12 mb-12">
+          {% if obj %}
+          <div class="card border-left-warning shadow h-100 py-2 ">
+          {% else %}
+          <div class="card border-left-success shadow h-100 py-2">
+          {% endif %}
+              <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                          <div class="text-xs font-weight-bold {% if obj %}text-warning{% else %}text-success{% endif %} text-uppercase mb-1">
+                              {% if obj %} Editar {% else %} Nueva {% endif %} marca
+                          </div> 
+                          <div class="dropdown-divider"></div>
+                          <div class="row">
+                              <div class="col-10">
+                                  <div class="input-group">
+                                      {{form.descripcion.label_tag}}
+                                      {{form.descripcion}}
+                                  </div>
+                              </div>
+                              <div class="col-2">
+                                  <div class="form-group"> 
+                                      {{form.estado.label_tag}}
+                                      {{form.estado}}
+                                  </div>
+                              </div>
+                          </div> 
+                          <div class="dropdown-divider"></div>
+                          <div class="row">
+                              <div class="col">
+                                  <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Guardar</button>
+                                  <a href="{% url 'inventario:marca_lista-vw' %}" class="btn btn-danger"><span class="fa fa-undo"></span> Cancelar</a>
+                              </div>
+                          </div>
+                      </div> 
+                  </div>
+              </div>
+          </div>
+      </div>
+  </form>
+<!-- /.content -->
+</div> 
 {% endblock %}
 
 {% block js_page %}
