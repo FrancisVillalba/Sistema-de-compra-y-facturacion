@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Categorías</h1>
+            <h1>Proveedores</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{% url 'bases:home-vw' %}">Home</a></li>
-              <li class="breadcrumb-item active">Categorías</li>
+              <li class="breadcrumb-item active">Proveedores</li>
             </ol>
           </div>
         </div>
@@ -27,9 +27,9 @@
             <!-- /.card --> 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Listado de categorías</h3>
+                <h3 class="card-title">Listado de proveedores</h3>
 
-                <div class="dropdown no-arrow btn btn-info float-right">
+                <div class="dropdown no-arrow float-right">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -37,7 +37,7 @@
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                         aria-labelledby="dropdownMenuLink">
                         <div class="dropdown-header">Acciones:</div>
-                        <a class="dropdown-item" href="{% url 'inventario:categoria_nuevo-vw' %}"><i class="far fa-plus-square"></i> Crear</a>
+                        <a class="dropdown-item" href="{% url 'proveedor:proveedor_nuevo-vw' %}"><i class="far fa-plus-square"></i> Crear</a>
                         <!-- <a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a> -->
@@ -49,9 +49,12 @@
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-color-head-and-footer table-striped">
                   <thead>
-                  <tr>
-                    <th>Id</th>
+                  <tr> 
                     <th>Descripción</th>
+                    <th>Dirección</th>
+                    <th>Contacto</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
                     <th>Estado</th>
                     <th>Usuario Creación</th>
                     <th>Fecha Creación</th>
@@ -66,8 +69,11 @@
                     {% else %}
                         {% for item in obj %}
                             <tr>
-                                <td>{{ item.id }}</td>
                                 <td>{{ item.descripcion }}</td>
+                                <td>{{ item.direccion }}</td>
+                                <td>{{ item.contacto }}</td>
+                                <td>{{ item.telefono }}</td>
+                                <td>{{ item.email }}</td> 
                                 <!-- <td>{{ item.estado|yesno:'Activo, Inactivo'}}</td> -->
                                 <td>
                                     <span class="badge {% if item.estado %}badge-success{% else %}badge-danger{% endif %}">
@@ -77,8 +83,8 @@
                                 <td>{{ item.usuario_creacion}}</td> 
                                 <td>{{ item.fecha_creacion|date:"d/m/Y" }}</td>
                                 <td>  
-                                    <a href="{% url 'inventario:categoria_editar-vw'  item.id  %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a> 
-                                    <a href="{% url 'inventario:categoria_editar_estado-vw' item.id %}" class="btn btn-danger btn-circle" role="button" onclick="return confirm('¿Estás seguro de que deseas inactivar el registro?');"><i class="fa fa-power-off"></i></a>
+                                    <a href="{% url 'proveedor:proveedor_editar-vw'  item.id  %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a> 
+                                    <a href="{% url 'proveedor:proveedor_editar_estado-vw' item.id %}" class="btn btn-danger btn-circle" role="button" onclick="return confirm('¿Estás seguro de que deseas inactivar el registro?');"><i class="fa fa-power-off"></i></a>
                                 </td> 
                             </tr>
                         {% endfor %} 
@@ -86,8 +92,11 @@
                   </tbody>
                   <tfoot>
                   <tr> 
-                    <th>Id</th>
                     <th>Descripción</th>
+                    <th>Dirección</th>
+                    <th>Contacto</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
                     <th>Estado</th>
                     <th>Usuario Creación</th>
                     <th>Fecha Creación</th>

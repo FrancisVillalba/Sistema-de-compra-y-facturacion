@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(('bases.urls','bases'), namespace='bases-vw')),
     path('inventario/',include(('inventario.urls','inventario'), namespace='inventario-vw')),
+    path('proveedor/',include(('proveedor.urls','proveedor'), namespace='proveedor-vw')),
 ]
 
 # if settings.DEBUG:

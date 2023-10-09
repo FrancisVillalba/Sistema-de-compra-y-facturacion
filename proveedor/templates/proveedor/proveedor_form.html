@@ -1,0 +1,98 @@
+{% extends 'base/base.html' %}
+
+{% block page_content %} 
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Proveedores</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'bases:home-vw' %}">Home</a></li>
+              <li class="breadcrumb-item active">Nuevo proveedor</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <form method="POST">
+      {% csrf_token %}
+      <div class="col-xl-12 col-md-12 mb-12">
+          {% if obj %}
+          <div class="card border-left-warning shadow h-100 py-2 ">
+          {% else %}
+          <div class="card border-left-success shadow h-100 py-2">
+          {% endif %}
+              <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                          <div class="text-xs font-weight-bold {% if obj %}text-warning{% else %}text-success{% endif %} text-uppercase mb-1">
+                              {% if obj %} Editar {% else %} Nueva {% endif %} Proveedor
+                          </div> 
+                          <div class="dropdown-divider"></div>
+                          <div class="row">
+                            <div class="col-sm-3"> 
+                                <div class="form-group"> 
+                                    {{form.descripcion.label_tag}}
+                                    {{form.descripcion}}
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    {{form.direccion.label_tag}}
+                                    {{form.direccion}}
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">  
+                                    {{form.contacto.label_tag}}
+                                    {{form.contacto}} 
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group"> 
+                                    {{form.telefono.label_tag}}
+                                    {{form.telefono}}
+                                </div>
+                            </div> 
+                        </div>  
+                        <br>
+                        <div class="row" >   
+                            <div class="col-sm-3">
+                                <div class="form-group"> 
+                                    {{form.email.label_tag}}
+                                    {{form.email}}
+                                </div>
+                            </div> 
+                            <div class="col-sm-1" >
+                                <div class="form-group"> 
+                                    {{form.estado.label_tag}}
+                                    <br>
+                                    {{form.estado}}
+                                </div>
+                            </div>
+                        </div> 
+                          <div class="dropdown-divider"></div>
+                          <div class="row">
+                              <div class="col">
+                                  <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Guardar</button>
+                                  <a href="{% url 'proveedor:proveedor_lista-vw' %}" class="btn btn-danger"><span class="fa fa-undo"></span> Cancelar</a>
+                              </div>
+                          </div>
+                      </div> 
+                  </div>
+              </div>
+          </div>
+      </div>
+  </form> 
+    <!-- /.content -->
+  </div> 
+{% endblock %}
+
+{% block js_page %}
+{% endblock %}

@@ -140,9 +140,9 @@ class MarcaEditar(LoginRequiredMixin, UpdateView):
         return super(MarcaEditar, self).form_valid(form) 
     
 def update_marca_estado(request, marca_id):
-    subcategoria = get_object_or_404(Marca, pk=marca_id)
-    subcategoria.estado = 0  # Set estado to 0 (False)
-    subcategoria.save()
+    marca = get_object_or_404(Marca, pk=marca_id)
+    marca.estado = 0  # Set estado to 0 (False)
+    marca.save()
     
     success_url = reverse_lazy('inventario:marca_lista-vw')  # Define success_url here
 
@@ -187,9 +187,9 @@ class UnidadMedidaEditar(LoginRequiredMixin, UpdateView):
         return super(UnidadMedidaEditar, self).form_valid(form) 
     
 def update_unidad_medida_estado(request, unidad_medida_id):
-    subcategoria = get_object_or_404(UnidadMedida, pk=unidad_medida_id)
-    subcategoria.estado = 0  # Set estado to 0 (False)
-    subcategoria.save()
+    unidad_medida = get_object_or_404(UnidadMedida, pk=unidad_medida_id)
+    unidad_medida.estado = 0  # Set estado to 0 (False)
+    unidad_medida.save()
     
     success_url = reverse_lazy('inventario:unidad_medida_lista-vw')  # Define success_url here
 
@@ -234,9 +234,9 @@ class ProductoEditar(LoginRequiredMixin, UpdateView):
         return super(ProductoEditar, self).form_valid(form) 
     
 def update_producto_estado(request, producto_id):
-    subcategoria = get_object_or_404(Producto, pk=producto_id)
-    subcategoria.estado = 0  # Set estado to 0 (False)
-    subcategoria.save()
+    producto = get_object_or_404(Producto, pk=producto_id)
+    producto.estado = 0  # Set estado to 0 (False)
+    producto.save()
     
     success_url = reverse_lazy('inventario:producto_lista-vw')  # Define success_url here
 
