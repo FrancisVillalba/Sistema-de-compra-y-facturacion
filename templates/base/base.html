@@ -406,6 +406,15 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{% static 'dist/js/pages/dashboard.js'%}"></script>
 
+{% if messages %} 
+  {% for message in messages %}
+    <script>
+      console.log('{{ message }}');
+      toastr.success('{{ message }}')
+    </script>
+  {% endfor %} 
+{% endif %}
+
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -451,6 +460,6 @@
 		{% endfor %}
 	  {% endif %}
 	{% endif %}
-</script>
-  </body>
+</script>  
+</body>
 </html>

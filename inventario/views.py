@@ -4,6 +4,7 @@ from django.views.generic import ListView, CreateView, UpdateView
 from .models import Categoria, Marca, Producto, SubCategoria, UnidadMedida
 from .forms import CategoriaForm, MarcaForm, ProductoForm, SubCategoriaForm, UnidadMedidaForm
 from django.urls import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 
@@ -15,22 +16,22 @@ class CategoriaView(LoginRequiredMixin, ListView):
     context_object_name = 'obj'
     
 
-class CategoriaNuevo(LoginRequiredMixin, CreateView):
+class CategoriaNuevo(SuccessMessageMixin,LoginRequiredMixin, CreateView):
     login_url='bases:login-vw'
 
     model = Categoria
     template_name = 'inventario/categoria_form.html'
     context_object_name = 'obj' 
     form_class = CategoriaForm
-    success_url = reverse_lazy('inventario:categoria_lista-vw')
-    
+    success_message = 'Creado con exito!'
+    success_url = reverse_lazy('inventario:categoria_lista-vw') 
 
     def form_valid(self, form):
         form.instance.usuario_creacion = self.request.user
         # return super().form.valid(form)
         return super(CategoriaNuevo, self).form_valid(form)
     
-class CategoriaEditar(LoginRequiredMixin, UpdateView):
+class CategoriaEditar(SuccessMessageMixin,LoginRequiredMixin, UpdateView):
     login_url='bases:login-vw'
 
     model = Categoria
@@ -38,7 +39,7 @@ class CategoriaEditar(LoginRequiredMixin, UpdateView):
     context_object_name = 'obj' 
     form_class = CategoriaForm
     success_url = reverse_lazy('inventario:categoria_lista-vw')
-    
+    success_message = 'Modificado con exito!'
 
     def form_valid(self, form):
         form.instance.usuario_modificacion = self.request.user.id
@@ -142,8 +143,8 @@ class MarcaEditar(LoginRequiredMixin, UpdateView):
 def update_marca_estado(request, marca_id):
     marca = get_object_or_404(Marca, pk=marca_id)
     marca.estado = 0  # Set estado to 0 (False)
-    marca.save()
-    
+    marca.save() 
+
     success_url = reverse_lazy('inventario:marca_lista-vw')  # Define success_url here
 
     return redirect(success_url)
