@@ -23,7 +23,7 @@ body {
   position: relative;
   height: 600px;
   width: 360px;
-  box-shadow: 0px 0px 24px #b55757;
+  box-shadow: 0px 0px 24px #4c4966;
 }
 
 .screen__content {
@@ -60,7 +60,7 @@ body {
 .screen__background__shape2 {
   height: 220px;
   width: 220px;
-  background: #d90f0f;
+  background: #4c4966;
   top: -172px;
   right: 0;
   border-radius: 32px;
@@ -69,7 +69,7 @@ body {
 .screen__background__shape3 {
   height: 540px;
   width: 190px;
-  background: linear-gradient(270deg, #ed0808, #d90f0f);
+  background: linear-gradient(270deg, #4c4966, #4c4966);
   top: -24px;
   right: 0;
   border-radius: 32px;
@@ -78,7 +78,7 @@ body {
 .screen__background__shape4 {
   height: 400px;
   width: 200px;
-  background: #ed0808;
+  background: #4c4966;
   top: 420px;
   right: 50px;
   border-radius: 60px;
@@ -132,7 +132,7 @@ body {
   align-items: center;
   width: 100%;
   color: #060606;
-  box-shadow: 0px 2px 2px #f10505;
+  box-shadow: 0px 2px 2px #4c4966;
   cursor: pointer;
   transition: 0.2s;
 }
@@ -170,7 +170,7 @@ body {
   padding: 20px 10px;
   color: #fff;
   text-decoration: none;
-  text-shadow: 0px 0px 8px #7875b5;
+  text-shadow: 0px 0px 8px #4c4966;
 }
 
 .social-login__icon:hover {

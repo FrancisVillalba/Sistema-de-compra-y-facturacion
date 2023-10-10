@@ -30,26 +30,7 @@
 				<div class="login__field">
 					<i class="login__icon fas fa-lock"></i>
 					<input type="password" class="login__input" id="id_password" name="password" placeholder="Password">
-				</div> 
-				<small class="text-danger">
-					{% if form.errors %}
-						
-						{% for field in form%}
-							{% if field.errors %}
-								{% for error in field.errors %}
-									{{error | escape}}
-								{% endfor %}
-							{% endif %}
-						{% endfor %}
-
-						{% if form.non_field_errors %}
-							{% for error in form.non_field_errors %}
-								{{error | escape}}
-							{% endfor %}
-						{% endif %}
-
-					{% endif %}
-				</small>
+				</div>  
 				<button class="button login__submit">
 					<span class="button__text">Ingresar</span>
 					<i class="button__icon fas fa-chevron-right"></i>
