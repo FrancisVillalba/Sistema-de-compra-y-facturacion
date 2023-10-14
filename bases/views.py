@@ -19,7 +19,7 @@ class Home(LoginRequiredMixin, generic.TemplateView):
     template_name = 'bases/home.html'
     login_url='bases:login-vw'
 
-class HomeSinPrivilegios(generic.TemplateView):
+class HomeSinPrivilegios(LoginRequiredMixin, generic.TemplateView):
     template_name = 'bases/sin_privilegios.html'
 
     
