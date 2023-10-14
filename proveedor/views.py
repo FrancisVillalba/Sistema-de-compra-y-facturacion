@@ -1,19 +1,21 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView
+from bases.views import SinPrivilegios
 from proveedor.forms import ProveedorForm
-from proveedor.models import Proveedor
-from django.contrib.auth.mixins import LoginRequiredMixin
+from proveedor.models import Proveedor 
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 # Create your views here.
-class ProveedorLista(LoginRequiredMixin, ListView):
+class ProveedorLista(SinPrivilegios,  LoginRequiredMixin, ListView):
+
+    permission_required = 'proveedor.view_proveedor'
+    
     login_url = 'bases/login-vw'
 
     model = Proveedor
     template_name = 'proveedor/proveedor_lista.html'
     context_object_name = 'obj'
-    
-
 class ProveedorNuevo(LoginRequiredMixin, CreateView):
     login_url='bases:login-vw' 
 
@@ -28,7 +30,6 @@ class ProveedorNuevo(LoginRequiredMixin, CreateView):
         form.instance.usuario_creacion = self.request.user
         # return super().form.valid(form)
         return super(ProveedorNuevo, self).form_valid(form)
-    
 class ProveedorEditar(LoginRequiredMixin, UpdateView):
     login_url='bases:login-vw'
 
@@ -44,8 +45,6 @@ class ProveedorEditar(LoginRequiredMixin, UpdateView):
         # return super().form.valid(form)
         return super(ProveedorEditar, self).form_valid(form) 
     
-
-
 def update_proveedor_estado(request, proveedor_id):
     proveedor = get_object_or_404(Proveedor, pk=proveedor_id)
     proveedor.estado = 0  # Set estado to 0 (False)

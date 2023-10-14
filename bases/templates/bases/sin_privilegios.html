@@ -1,0 +1,53 @@
+{% extends 'base/base.html' %}
+
+{% block page_content %} 
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <!-- <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Starter Page</h1>
+          </div> 
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Starter Page</li>
+            </ol>
+          </div> 
+        </div>  -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row"> 
+          <!-- /.col-md-6 -->
+          <div class="col-lg-2"></div>
+          <div class="col-lg-8"> 
+            <div class="card card-danger card-outline">
+              <div class="card-header">
+                <h3 class="m-0" style="color: red; font-weight: bold;">Sin privilegio para ingresar</h3> 
+              </div>
+              <div class="card-body">  
+                <h4><p class="card-text">Hola.</p></h4>  
+                <h4><p class="card-text"> <strong>{{ user.first_name }} {{ user.last_name }}</strong></p></h4> 
+                <br>
+                <h4><p class="card-text">No cuenta con los privilegios suficientes para ingresar a esta opción, si necesita privilegios contacte con el administrador.</p></h4> 
+                
+              </div>
+              <div class="card-footer clearfix"> 
+                <a href="{% url 'bases:home-vw' %}" class="btn btn-danger float-right">Ir a inicio</a> 
+              </div>
+            </div>
+          </div>
+          <!-- /.col-md-6 -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+</div>
+{% endblock %}

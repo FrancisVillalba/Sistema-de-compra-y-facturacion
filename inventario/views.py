@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView
+
+from bases.views import SinPrivilegios
 from .models import Categoria, Marca, Producto, SubCategoria, UnidadMedida
 from .forms import CategoriaForm, MarcaForm, ProductoForm, SubCategoriaForm, UnidadMedidaForm
 from django.urls import reverse_lazy
@@ -8,7 +10,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 
-class CategoriaView(LoginRequiredMixin, ListView):
+class CategoriaView(SinPrivilegios, LoginRequiredMixin, ListView):
+
+    permission_required = 'inventario.view_categoria'
+
     login_url = 'bases/login-vw'
 
     model = Categoria
@@ -31,7 +36,7 @@ class CategoriaNuevo(SuccessMessageMixin,LoginRequiredMixin, CreateView):
         # return super().form.valid(form)
         return super(CategoriaNuevo, self).form_valid(form)
     
-class CategoriaEditar(SuccessMessageMixin,LoginRequiredMixin, UpdateView):
+class CategoriaEditar( SuccessMessageMixin,LoginRequiredMixin, UpdateView):
     login_url='bases:login-vw'
 
     model = Categoria
@@ -47,7 +52,6 @@ class CategoriaEditar(SuccessMessageMixin,LoginRequiredMixin, UpdateView):
         return super(CategoriaEditar, self).form_valid(form) 
     
 
-
 def update_categoria_estado(request, categoria_id):
     categoria = get_object_or_404(Categoria, pk=categoria_id)
     categoria.estado = 0  # Set estado to 0 (False)
@@ -57,7 +61,10 @@ def update_categoria_estado(request, categoria_id):
 
     return redirect(success_url)
 
-class SubCategoriaView(LoginRequiredMixin, ListView):
+class SubCategoriaView(SinPrivilegios, LoginRequiredMixin, ListView):
+
+    permission_required = 'inventario.view_subcategoria'
+
     login_url = 'bases/login-vw'
 
     model = SubCategoria
@@ -103,7 +110,9 @@ def update_supcategoria_estado(request, categoria_id):
 
     return redirect(success_url)
 
-class MarcaLista(LoginRequiredMixin, ListView):
+class MarcaLista(SinPrivilegios, LoginRequiredMixin, ListView):
+    permission_required = 'inventario.view_marca'
+    
     login_url = 'bases/login-vw'
 
     model = Marca
@@ -150,7 +159,9 @@ def update_marca_estado(request, marca_id):
     return redirect(success_url)
 
 
-class UnidadMedidaLista(LoginRequiredMixin, ListView):
+class UnidadMedidaLista(SinPrivilegios, LoginRequiredMixin, ListView):
+    permission_required = 'inventario.view_unidad_medida'
+
     login_url = 'bases/login-vw'
 
     model = UnidadMedida
@@ -197,7 +208,10 @@ def update_unidad_medida_estado(request, unidad_medida_id):
     return redirect(success_url)
 
 
-class PruductoLista(LoginRequiredMixin, ListView):
+class PruductoLista(SinPrivilegios, LoginRequiredMixin, ListView):
+
+    permission_required = 'inventario.view_producto'
+
     login_url = 'bases/login-vw'
 
     model = Producto

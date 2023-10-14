@@ -134,12 +134,7 @@
                     </a>
                   </li> 
                 </ul>
-              </li>
-              <!-- <a class="collapse-item" href="{% url 'inventario:categoria_lista-vw' %}">Categorías</a>
-                        <a class="collapse-item" href="{% url 'inventario:subcategoria_lista-vw' %}">Sub categorías</a>
-                        <a class="collapse-item" href="{% url 'inventario:marca_lista-vw' %}">Marcas</a>
-                        <a class="collapse-item" href="{% url 'inventario:unidad_medida_lista-vw' %}">Unidades de medidas</a>
-                        <a class="collapse-item" href="{% url 'inventario:producto_lista-vw' %}">Productos</a> -->
+              </li> 
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
@@ -149,42 +144,54 @@
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
+                  {% if perms.inventario.view_categoria %}
                   <li class="nav-item">
                     <a href="{% url 'inventario:categoria_lista-vw' %}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Categorías</p>
                     </a>
                   </li>
+                  {% endif %}
+                  {% if perms.inventario.view_subcategoria %}
                   <li class="nav-item">
                     <a href="{% url 'inventario:subcategoria_lista-vw' %}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Sub Categorías</p>
                     </a>
                   </li>
+                  {% endif %}
+                  {% if perms.inventario.view_marca %}
                   <li class="nav-item">
                     <a href="{% url 'inventario:marca_lista-vw' %}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Marcas</p>
                     </a>
                   </li>
+                  {% endif %}
+                  {% if perms.inventario.view_unidad_medida %}
                   <li class="nav-item">
                     <a href="{% url 'inventario:unidad_medida_lista-vw' %}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Unidad de medida</p>
                     </a>
                   </li>
+                  {% endif %}
+                  {% if perms.inventario.view_producto %}
                   <li class="nav-item">
                     <a href="{% url 'inventario:producto_lista-vw' %}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Productos</p>
                     </a>
                   </li>
+                  {% endif %}
+                  {% if perms.proveedor.view_proveedor %}
                   <li class="nav-item">
                     <a href="{% url 'proveedor:proveedor_lista-vw' %}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Proveedores</p>
                     </a>
                   </li>
+                  {% endif %}
                 </ul>
               </li>
               <li class="nav-item">
