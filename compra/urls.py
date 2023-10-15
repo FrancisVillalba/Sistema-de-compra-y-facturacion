@@ -1,6 +1,6 @@
 from django.urls import path
 
-from proveedor.views import ProveedorEditar, ProveedorLista, ProveedorNuevo, update_proveedor_estado
+from compra.views import ProveedorEditar, ProveedorLista, ProveedorNuevo, update_proveedor_estado
 
 urlpatterns = [
     path('proveedores/', ProveedorLista.as_view(), name='proveedor_lista-vw'), 

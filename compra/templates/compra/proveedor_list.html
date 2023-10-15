@@ -37,7 +37,7 @@
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                         aria-labelledby="dropdownMenuLink">
                         <div class="dropdown-header">Acciones:</div>
-                        <a class="dropdown-item" href="{% url 'proveedor:proveedor_nuevo-vw' %}"><i class="far fa-plus-square"></i> Crear</a>
+                        <a class="dropdown-item" href="{% url 'compra:proveedor_nuevo-vw' %}"><i class="far fa-plus-square"></i> Crear</a>
                         <!-- <a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a> -->
@@ -83,8 +83,8 @@
                                 <td>{{ item.usuario_creacion}}</td> 
                                 <td>{{ item.fecha_creacion|date:"d/m/Y" }}</td>
                                 <td>  
-                                    <a href="{% url 'proveedor:proveedor_editar-vw'  item.id  %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a> 
-                                    <a href="{% url 'proveedor:proveedor_editar_estado-vw' item.id %}" class="btn btn-danger btn-circle" role="button" onclick="return confirm('¿Estás seguro de que deseas inactivar el registro?');"><i class="fa fa-power-off"></i></a>
+                                    <a href="{% url 'compra:proveedor_editar-vw'  item.id  %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a> 
+                                    <a href="{% url 'compra:proveedor_editar_estado-vw' item.id %}" class="btn btn-danger btn-circle" role="button" onclick="return confirm('¿Estás seguro de que deseas inactivar el registro?');"><i class="fa fa-power-off"></i></a>
                                 </td> 
                             </tr>
                         {% endfor %} 

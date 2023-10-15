@@ -1,6 +1,6 @@
 from django import forms
 
-from proveedor.models import Proveedor
+from compra.models import Proveedor
 
 
 class ProveedorForm(forms.ModelForm):

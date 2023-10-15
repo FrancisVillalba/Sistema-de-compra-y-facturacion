@@ -2,28 +2,29 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView
 from bases.views import SinPrivilegios
-from proveedor.forms import ProveedorForm
-from proveedor.models import Proveedor 
+from compra.forms import ProveedorForm
+from compra.models import Proveedor 
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 # Create your views here.
 class ProveedorLista(SinPrivilegios,  LoginRequiredMixin, ListView):
-
-    permission_required = 'proveedor.view_proveedor'
+ 
+    permission_required = 'compra.view_proveedor'
     
     login_url = 'bases/login-vw'
 
     model = Proveedor
-    template_name = 'proveedor/proveedor_lista.html'
+    template_name = 'compra/proveedor_lista.html'
     context_object_name = 'obj'
+
 class ProveedorNuevo(LoginRequiredMixin, CreateView):
     login_url='bases:login-vw' 
 
     model = Proveedor
-    template_name = 'proveedor/proveedor_form.html'
+    template_name = 'compra/proveedor_form.html'
     context_object_name = 'obj'
     form_class = ProveedorForm
-    success_url = reverse_lazy('proveedor:proveedor_lista-vw')
+    success_url = reverse_lazy('compra:proveedor_lista-vw')
     
 
     def form_valid(self, form):
@@ -34,10 +35,10 @@ class ProveedorEditar(LoginRequiredMixin, UpdateView):
     login_url='bases:login-vw'
 
     model = Proveedor
-    template_name = 'proveedor/proveedor_form.html'
+    template_name = 'compra/proveedor_form.html'
     context_object_name = 'obj' 
     form_class = ProveedorForm
-    success_url = reverse_lazy('proveedor:proveedor_lista-vw')
+    success_url = reverse_lazy('compra:proveedor_lista-vw')
     
 
     def form_valid(self, form):
@@ -50,6 +51,6 @@ def update_proveedor_estado(request, proveedor_id):
     proveedor.estado = 0  # Set estado to 0 (False)
     proveedor.save()
     
-    success_url = reverse_lazy('proveedor:proveedor_lista-vw')  # Define success_url here
+    success_url = reverse_lazy('compra:proveedor_lista-vw')  # Define success_url here
 
     return redirect(success_url)
