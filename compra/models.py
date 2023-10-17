@@ -1,6 +1,7 @@
 from django.db import models
 
 from bases.models import ClaseModelo
+from inventario.models import Producto
 
 # Create your models here.
 class Proveedor(ClaseModelo):
@@ -19,4 +20,54 @@ class Proveedor(ClaseModelo):
 
     class Meta:
         verbose_name_plural = 'Proveedores' 
+
+
+class ComprasCabecera(ClaseModelo):
+    fecha_compra = models.DateField(null=True, blank=True)
+    observacion = models.TextField(blank=True, null=True)
+    numero_factura = models.CharField(max_length=100)
+    fecha_factura =models.DateField(null=True, blank=True)
+    sub_total = models.FloatField(default=0)
+    descuento = models.FloatField(default=0)
+    total = models.FloatField(default=0)
+
+    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '{}'.format(self.observacion)
+    
+    def save(self):
+        self.observacion = self.observacion.upper()
+        self.total = self.sub_total - self.descuento
+        super(ComprasCabecera.self).save()
+
+    class Meta:
+        verbose_name_plural = 'Encabezado compras'
+        verbose_name = "Encabezado compra"
+
+
+class ComprasDetalle(ClaseModelo): 
+    cantidad = models.BigIntegerField(default=0)
+    precio_proveedor = models.FloatField(default=0)
+    sub_total = models.FloatField(default=0)
+    descuento = models.FloatField(default=0)
+    total = models.FloatField(default=0)
+    costo = models.FloatField(default=0)
+
+    compra = models.ForeignKey(ComprasCabecera, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '{}'.format(self.producto)
+    
+    def save(self):
+        self.sub_total = float(float(int(self.cantidad)) * float(self.precio_proveedor))
+        self.total = self.sub_total - float(self.descuento)
+        super(ComprasDetalle, self).save()
+
+    class Meta:
+        verbose_name_plural = 'Detalles compras'
+        verbose_name = "Detalle compra"
+
+
      

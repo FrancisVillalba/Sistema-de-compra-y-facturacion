@@ -1,6 +1,6 @@
 from django import forms
 
-from compra.models import Proveedor
+from compra.models import ComprasCabecera, Proveedor
 
 
 class ProveedorForm(forms.ModelForm):
@@ -27,3 +27,38 @@ class ProveedorForm(forms.ModelForm):
 
         # Agregar una etiqueta personalizada para el nombre del input en el html
         self.fields['estado'].label = 'Estado:'  
+
+class CompraCabeceraForm(forms.ModelForm):
+    class Meta:
+        model = ComprasCabecera
+        fields = ['proveedor', 'fecha_compra', 'observacion', 'numero_factura', 'fecha_factura', 
+                  'sub_total', 'descuento', 'total']
+        
+        labels = {'proveedor': 'Proveedor:', 
+                  'fecha_compra': 'Fecha compra:', 
+                  'observacion': 'Observación:', 
+                  'numero_factura': 'Nro. factura:', 
+                  'fecha_factura': 'Fecha factura:', 
+                  'sub_total': 'Sub total:',
+                  'descuento':'Descuento',
+                  'total':'Total'}
+        
+        # widgets = {
+        #     'observacion': forms.TextInput,
+        #     'fecha_compra' : forms.DateTimeInput,
+        #     'fecha_factura' : forms.DateTimeInput,
+        # }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control'
+            })
+
+        self.fields['fecha_compra'].widget.attrs['readonly'] = True
+        self.fields['fecha_factura'].widget.attrs['readonly'] = True
+        self.fields['sub_total'].widget.attrs['readonly'] = True
+        self.fields['descuento'].widget.attrs['readonly'] = True
+        self.fields['total'].widget.attrs['readonly'] = True  
