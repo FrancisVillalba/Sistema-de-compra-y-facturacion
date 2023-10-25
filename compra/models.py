@@ -26,7 +26,7 @@ class ComprasCabecera(ClaseModelo):
     fecha_compra = models.DateField(null=True, blank=True)
     observacion = models.TextField(blank=True, null=True)
     numero_factura = models.CharField(max_length=100)
-    fecha_factura =models.DateField(null=True, blank=True)
+    fecha_factura =models.DateField()
     sub_total = models.FloatField(default=0)
     descuento = models.FloatField(default=0)
     total = models.FloatField(default=0)
@@ -34,12 +34,19 @@ class ComprasCabecera(ClaseModelo):
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '{}'.format(self.observacion)
+        return f'ID: {self.id}, Fecha de Compra: {self.fecha_compra}, Observación: {self.observacion}, Factura: {self.numero_factura}, Fecha de Factura: {self.fecha_factura}, Subtotal: {self.sub_total}, Descuento: {self.descuento}, Total: {self.total}, Proveedor: {self.proveedor}'
     
     def save(self):
         self.observacion = self.observacion.upper()
+        if self.sub_total == None  or self.descuento == None:
+            self.sub_total = 0
+            self.descuento = 0
+            
         self.total = self.sub_total - self.descuento
-        super(ComprasCabecera.self).save()
+        # self.observacion = self.observacion.upper()
+        # self.total = self.sub_total - self.descuento
+        print("self:", self)
+        super(ComprasCabecera,self).save()
 
     class Meta:
         verbose_name_plural = 'Encabezado compras'

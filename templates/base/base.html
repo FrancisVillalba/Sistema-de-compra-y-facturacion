@@ -421,9 +421,8 @@
     });
   });
 </script> 
-
 <script>
-  $(function () {
+  $(function(){
     $("#table-compras").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false, 
     }).buttons().container().appendTo('#table-compras_wrapper .col-md-6:eq(0)');
@@ -436,9 +435,12 @@
       "autoWidth": false,
       "responsive": true,
     });
-  });
-</script> 
 
+    $('#id_cantidad_detalle,#id_precio_detalle,#id_descuento_detalle').change(function(){
+            calcular_detalle();
+     });
+  });
+</script>
 <script>
 	// Verificar si hay errores en el formulario
 	{% if form.errors %}

@@ -69,11 +69,10 @@
                     {% else %}
                         {% for item in obj %}
                             <tr>  
-                                <td>{{ item.id }}</td>
-                                <td>{{ item.fecha_compra }}</td>
+                                <td>{{ item.id }}</td> 
                                 <td>{{ item.observacion }}</td>
                                 <td>{{ item.numero_factura }}</td>
-                                <td>{{ item.fecha_factura }}</td> 
+                                <td>{{ item.fecha_factura|date:"d/m/Y" }}</td> 
                                 <td>{{ item.sub_total }}</td> 
                                 <td>{{ item.descuento }}</td> 
                                 <td>{{ item.total }}</td>   
@@ -86,8 +85,7 @@
                                 <td>{{ item.usuario_creacion}}</td> 
                                 <td>{{ item.fecha_creacion|date:"d/m/Y" }}</td>
                                 <td> 
-                                  <a href="{% url 'compra:compra_editar-vw'  item.id  %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a> 
-                                  <a href="{% url 'compra:compra_editar_estado-vw' item.id %}" class="btn btn-danger btn-circle" role="button" onclick="return confirm('¿Estás seguro de que deseas inactivar el registro?');"><i class="fa fa-power-off"></i></a>
+                                  <a href="{% url 'compra:compras_editar-vw'  item.id  %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a> 
                                 </td> 
                             </tr>
                         {% endfor %} 
