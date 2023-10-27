@@ -322,10 +322,8 @@
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-    {% block login %} {% endblock login%}
-
-    {% block js_page %} {% endblock js_page %} 
-    <!-- jQuery -->
+    {% block login %} {% endblock login%} 
+<!-- jQuery -->
 <script src="{% static 'plugins/jquery/jquery.min.js'%}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{% static 'plugins/jquery-ui/jquery-ui.min.js'%}"></script>
@@ -380,6 +378,8 @@
 <!-- XDSoft DateTimePicker --> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script> 
 
+{% block js_page %} {% endblock js_page %} 
+
 <script>
   $(document).ready(function () {
     jQuery.datetimepicker.setLocale('es');
@@ -402,45 +402,7 @@
       toastr.success('{{ message }}')
     </script>
   {% endfor %} 
-{% endif %} 
-
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script> 
-<script>
-  $(function(){
-    $("#table-compras").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false, 
-    }).buttons().container().appendTo('#table-compras_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-
-    $('#id_cantidad_detalle,#id_precio_detalle,#id_descuento_detalle').change(function(){
-            calcular_detalle();
-     });
-  });
-</script>
+{% endif %}  
 <script>
 	// Verificar si hay errores en el formulario
 	{% if form.errors %}

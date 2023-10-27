@@ -90,7 +90,7 @@ def compras(request, compra_id = None):
         cabecera = ComprasCabecera.objects.filter(pk=compra_id).first()
 
         if cabecera: 
-            detalle = ComprasDetalle.objects.filter(compras=cabecera)
+            detalle = ComprasDetalle.objects.filter(compra=cabecera)
             fecha_compra = datetime.date.isoformat(cabecera.fecha_compra)
             fecha_factura = datetime.date.isoformat(cabecera.fecha_factura)
 
@@ -124,32 +124,23 @@ def compras(request, compra_id = None):
         proveedor = request.POST.get("proveedor")
         sub_total = 0
         descuento = 0
-        total = 0
+        total = 0 
 
-           # Imprimir los valores
-        print("fecha_compra:", fecha_compra)
-        print("observacion:", observacion)
-        print("numero_factura:", numero_factura)
-        print("fecha_factura:", fecha_factura)
-        print("proveedor:", proveedor)
-        # Verificamos si compraID esta cargado para hacer un insert o un update
-         
-        print("compra_id::",compra_id)
+
+        # Verificamos si compraID esta cargado para hacer un insert o un update  
         if not compra_id:
             
-            proveedor2=Proveedor.objects.get(pk=proveedor)
-
-            print("Proveedor:", proveedor2) 
+            proveedor=Proveedor.objects.get(pk=proveedor)
+ 
             cabecera = ComprasCabecera(
                 fecha_compra = fecha_compra,
                 observacion = observacion,
                 numero_factura = numero_factura,
                 fecha_factura = fecha_factura,
-                proveedor = proveedor2,
+                proveedor = proveedor,
                 usuario_creacion = request.user 
             )  
-
-            print("Cabecera8: ",cabecera)
+ 
             if cabecera:
                 cabecera.save()
                 compra_id=cabecera.id
@@ -160,11 +151,11 @@ def compras(request, compra_id = None):
                 cabecera.observacion = observacion
                 cabecera.numero_factura=numero_factura
                 cabecera.fecha_factura=fecha_factura
-                cabecera.usuario_creacion=request.user.id
+                cabecera.usuario_modificacion=request.user.id
                 cabecera.save()
                     
-        print("cabeceraaaa")
-        print(cabecera)
+         
+        print("compra_id:-----:",compra_id)
         if not compra_id:
             return redirect("compra:compras_lista-vw")
             
@@ -176,17 +167,21 @@ def compras(request, compra_id = None):
         descuento_detalle  = request.POST.get("id_descuento_detalle")
         total_detalle  = request.POST.get("id_total_detalle")
 
-        producto = Producto.objects.get(pk=producto)
+        productoObj = Producto.objects.get(pk=producto)
+        
+        print("producto:---:",productoObj)
 
         detalle = ComprasDetalle(
             compra=cabecera,
-            producto=producto,
+            producto=productoObj,
             cantidad=cantidad,
-            precio_prv=precio,
+            precio_proveedor=precio,
             descuento=descuento_detalle,
             costo=0,
             usuario_creacion = request.user
         )
+
+        print("DETALLE:---:",detalle)
 
         if detalle:
             detalle.save()
@@ -200,3 +195,13 @@ def compras(request, compra_id = None):
         return redirect("compra:compras_editar-vw",compra_id=compra_id)
 
     return render(request, template_name, contexto)
+
+def compra_eliminar_detalle(request, detalle_id):
+    detalle = get_object_or_404(ComprasDetalle, pk=detalle_id)
+    detalleId = detalle.compra.id 
+    print(detalle.compra)
+    detalle.delete()  # Elimina el registro
+
+    success_url = reverse_lazy('compra:compras_editar-vw', kwargs={'compra_id': detalleId})
+
+    return redirect(success_url)

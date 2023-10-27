@@ -65,7 +65,7 @@ class ComprasDetalle(ClaseModelo):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '{}'.format(self.producto)
+        return f'Cantidad: {self.cantidad}, Precio Proveedor: {self.precio_proveedor}, Subtotal: {self.sub_total}, Descuento: {self.descuento}, Total: {self.total}, Costo: {self.costo}, Producto: {self.producto}, Compra: {self.compra}'
     
     def save(self):
         self.sub_total = float(float(int(self.cantidad)) * float(self.precio_proveedor))

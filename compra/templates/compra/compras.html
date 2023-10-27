@@ -207,12 +207,14 @@
                                                         <tr>
                                                         <td>{{ item.producto }}</td>
                                                         <td>{{ item.cantidad }}</td>
-                                                        <td>{{ item.cantidad }}</td>
+                                                        <td>{{ item.precio_proveedor }}</td>
                                                         <td>{{ item.sub_total }}</td>
                                                         <td>{{ item.descuento }}</td>
                                                         <td>{{ item.total }}</td>
                                                         <td>
-                                                            <button class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></button>
+                                                            <!-- <button class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></button> -->
+                                                            <!-- <a href="#" class=""><i class="fas fa-trash-alt" style="color: red;"></i></a> -->
+                                                            <a href="{% url 'compra:compra_detalle_eliminar-vw' item.id %}" style="color: red;" role="button" onclick="return confirm('¿Estás seguro de que deseas inactivar el registro?');"><i class="fas fa-trash-alt"></i></a>
                                                         </td>
                                                         </tr>
                                                         {% endfor %}
@@ -241,6 +243,39 @@
 </div> 
 {% endblock %}
 {% block js_page %}  
+<script>
+    $(function(){
+      $("#table-compras").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false, 
+      }).buttons().container().appendTo('#table-compras_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+  
+      $('#id_cantidad_detalle,#id_precio_detalle,#id_descuento_detalle').change(function(){
+              calcular_detalle();
+      });
+
+      /*Validar Envío de Detalle */
+      $("#frmCompras").submit(function(e){
+        if($('#id_total_detalle').val()==0 || $('#id_id_producto').val()==0 ){
+                e.preventDefault();
+                //alert("No ha agregado producto o está sin cantidades");
+                $(document).Toasts('create', {
+                            class: 'bg-danger',
+                            title: 'Mensaje de error!', 
+                            body: 'No ha agregado producto o está sin cantidades'
+                            });
+            }
+      });
+    });
+</script>
 <script> 
     function selectProducto(id, descripcion){
         $("#id_cantidad_detalle").val(0);
